@@ -1,0 +1,43 @@
+group = 'se.joelabs'
+version = '1.0-SNAPSHOT'
+description = """springboot-jpa-mongo-scala-service"""
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE"
+        classpath "gradle.plugin.com.github.maiflai:gradle-scalatest:0.15"
+    }
+}
+
+apply plugin: 'scala'
+apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'com.github.maiflai.scalatest'
+
+repositories {
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencies {
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.2'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.3.RELEASE'
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.3.RELEASE') {
+        exclude(module: 'commons-logging')
+    }
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.3.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '1.5.3.RELEASE'
+    compile group: 'org.springframework.data', name: 'spring-data-rest-webmvc', version: '2.6.3.RELEASE'
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.12', version: '2.8.8'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.191'
+    compile group: 'org.scalamock', name: 'scalamock-scalatest-support_2.12', version: '3.6.0'
+    testCompile group: 'org.scalatest', name: 'scalatest_2.12', version: '3.0.3'
+    testRuntime 'org.pegdown:pegdown:1.4.2'
+}
+
