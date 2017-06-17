@@ -1,0 +1,27 @@
+@startuml
+
+class User {
+  signum: String
+  firstName: String
+  lastName: String
+  hasWriteAccessTo(resource: Resource): boolean
+  hasReadAccessTo(resource: Resource): boolean
+}
+
+class UserRole {
+  name: String
+}
+
+class Resource {
+  id: Long
+  path: String
+}
+
+User "0..n" -- "0..n" UserRole
+UserRole "0..n" -- "0..n" Resource
+(UserRole, Resource) .. Permission
+
+class Permission {
+  isWritable():boolean
+}
+@enduml

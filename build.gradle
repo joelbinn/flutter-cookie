@@ -1,6 +1,6 @@
 group = 'se.joelabs'
 version = '1.0-SNAPSHOT'
-description = """springboot-jpa-mongo-scala-service"""
+description = """flutter-cookie"""
 
 buildscript {
     repositories {

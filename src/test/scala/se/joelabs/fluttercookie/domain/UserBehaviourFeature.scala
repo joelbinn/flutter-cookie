@@ -1,10 +1,10 @@
-package se.joelabs.scalaservice.domain
+package se.joelabs.fluttercookie.domain
 
 import org.scalamock.scalatest.MockFactory
 import org.scalatest._
 
 
-class BananFeature extends FeatureSpec with GivenWhenThen with MockFactory with Matchers {
+class UserBehaviourFeature extends FeatureSpec with GivenWhenThen with MockFactory with Matchers {
 
   info("As a developer")
   info("I want to be able to create MongoDB entities using scala case classes")
@@ -14,19 +14,19 @@ class BananFeature extends FeatureSpec with GivenWhenThen with MockFactory with 
     scenario("Use case class in match statement") {
 
       Given("an entity exists")
-      val banan: Banan = Banan(color = "yellow")
+//      val banan: UserBehaviour = UserBehaviour(color = "yellow")
 
       When("matching entity")
-      val color = banan match {
-        case Banan(_, c) =>
-          c
-        case _ =>
-          "red"
-      }
+//      val color = banan match {
+//        case UserBehaviour(_, c) =>
+//          c
+//        case _ =>
+//          "red"
+//      }
 
       Then("matching works")
-      color shouldBe "yellow"
-      banan.color shouldEqual color
+//      color shouldBe "yellow"
+//      banan.color shouldEqual color
     }
   }
 }

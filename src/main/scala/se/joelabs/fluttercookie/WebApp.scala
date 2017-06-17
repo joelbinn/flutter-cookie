@@ -1,4 +1,4 @@
-package se.joelabs.scalaservice
+package se.joelabs.fluttercookie
 
 import com.fasterxml.jackson.databind.Module
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 @ComponentScan
 @Configuration
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = Array("se.joelabs.fluttercookie.infrastructure.jpa"))
 @EnableAutoConfiguration
 class SampleConfig {
   @Bean
