@@ -1,17 +1,20 @@
 package se.joelabs.fluttercookie.domain
 
-trait Permission {
-  def grantWriteAccess(writable: Boolean)
+class Permission(pUserRole: UserRole, pResource: Resource) {
+  private var _id: java.lang.Long = null.asInstanceOf[java.lang.Long]
+  private var _writable: Boolean = true
+  private var _resource: Resource = pResource
+  private var _userRole: UserRole = pUserRole
 
-  def isWritable: Boolean
+  def grantWriteAccess(writable: Boolean) {
+    _writable = writable
+  }
 
-  def getResource: Resource
+  def isWritable: Boolean = _writable
 
-  def getUserRole: UserRole
-}
+  def resource = _resource
 
-case class PermissionBehaviour(permission: Permission)
+  def userRole = _userRole
 
-object Permission {
-  implicit def toPermissionBehaviour(permission: Permission): PermissionBehaviour = PermissionBehaviour(permission)
+  private def this() = this(null, null)
 }

@@ -1,15 +1,18 @@
 package se.joelabs.fluttercookie.domain
 
-trait UserRole {
-  def getName: String
+import java.util
 
-  def getUsers: Seq[User]
+import scala.collection.JavaConverters._
 
-  def getPermissions: Seq[Permission]
-}
+class UserRole {
+  private var _id: java.lang.Long = null.asInstanceOf[java.lang.Long]
+  private var _name: String = _
+  private var _users: util.List[User] = new util.ArrayList()
+  private var _permissions: util.List[Permission] = new util.ArrayList()
 
-case class UserRoleBehaviour(userRole: UserRole)
+  def name = _name
 
-object UserRole {
-  implicit def toUserRole(userRole: UserRole): UserRoleBehaviour = UserRoleBehaviour(userRole)
+  def users = _users.asScala
+
+  def permissions = _permissions.asScala
 }

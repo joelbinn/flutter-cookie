@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+                 version="2.1">
+    <entity class="se.joelabs.fluttercookie.domain.User" access="FIELD">
+        <table name="USER"/>
+        <attributes>
+            <id name="_signum">
+                <column name="SIGNUM"/>
+            </id>
+            <basic name="_firstName">
+                <column name="FIRST_NAME"/>
+            </basic>
+            <basic name="_lastName">
+                <column name="LAST_NAME"/>
+            </basic>
+            <basic name="_extra">
+                <column name="EXTRA"/>
+                <convert converter="se.joelabs.fluttercookie.infrastructure.jpa.CompoundAttributeConverter"/>
+            </basic>
+            <many-to-many name="_userRoles">
+                <join-table name="USER_TO_USERROLE">
+                    <join-column name="USER_FK"/>
+                    <inverse-join-column name="USERROLE_FK"/>
+                </join-table>
+            </many-to-many>
+        </attributes>
+    </entity>
+    <entity class="se.joelabs.fluttercookie.domain.Permission" access="FIELD">
+        <table name="PERMISSION"/>
+        <attributes>
+            <id name="_id">
+                <column name="ID"/>
+                <generated-value/>
+            </id>
+            <basic name="_writable">
+                <column name="WRITABLE"/>
+            </basic>
+            <many-to-one name="_resource">
+                <join-column name="RESOURCE_FK"/>
+            </many-to-one>
+            <many-to-one name="_userRole">
+                <join-column name="USER_ROLE_FK"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+    <entity class="se.joelabs.fluttercookie.domain.Resource" access="FIELD">
+        <table name="RESOURCE"/>
+        <attributes>
+            <id name="_id">
+                <column name="ID"/>
+                <generated-value/>
+            </id>
+            <basic name="_name">
+                <column name="NAME"/>
+            </basic>
+            <basic name="_uri">
+                <column name="URI"/>
+            </basic>
+            <many-to-many name="_permissions" mapped-by="_resource">
+            </many-to-many>
+        </attributes>
+    </entity>
+    <entity class="se.joelabs.fluttercookie.domain.UserRole" access="FIELD">
+        <table name="USER_ROLE"/>
+        <attributes>
+            <id name="_id">
+                <column name="ID"/>
+                <generated-value/>
+            </id>
+            <basic name="_name">
+                <column name="NAME"/>
+            </basic>
+            <many-to-many name="_users" mapped-by="_userRoles"/>
+            <many-to-many name="_permissions" mapped-by="_userRole"/>
+        </attributes>
+    </entity>
+</entity-mappings>

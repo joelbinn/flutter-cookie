@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.PagingAndSortingRepository
 import se.joelabs.fluttercookie.domain.Resource
 
-trait ResourceRepo extends PagingAndSortingRepository[ResourceJPA, java.lang.Long] with JpaRepository[ResourceJPA, java.lang.Long] {
-  def findByUri(uri: String): Resource
+trait ResourceRepo extends PagingAndSortingRepository[Resource, java.lang.Long] with JpaRepository[Resource, java.lang.Long] {
+  def findBy_uri(uri: String): Resource
 }

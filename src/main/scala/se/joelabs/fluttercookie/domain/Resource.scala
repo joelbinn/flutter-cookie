@@ -1,15 +1,18 @@
 package se.joelabs.fluttercookie.domain
 
-trait Resource {
-  def getName: String
+import java.util
 
-  def getUri: String
+import scala.collection.JavaConverters._
 
-  def getPermissions: Seq[Permission]
-}
+class Resource {
+  private var _id: java.lang.Long = null.asInstanceOf[java.lang.Long]
+  private var _name: String = _
+  private var _uri: String = _
+  private var _permissions: java.util.List[Permission] = new util.ArrayList()
 
-case class ResourceBehaviour(resource: Resource)
+  def name = _name
 
-object Resource {
-  implicit def toResource(resource: Resource): ResourceBehaviour = ResourceBehaviour(resource)
+  def uri = _uri
+
+  def permissions = _permissions.asScala
 }

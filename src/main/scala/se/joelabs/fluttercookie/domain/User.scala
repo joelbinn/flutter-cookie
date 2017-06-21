@@ -1,24 +1,38 @@
 package se.joelabs.fluttercookie.domain
 
-trait User {
-  def getSignum: String
+import java.util
 
-  def getFirstName: String
+import com.fasterxml.jackson.annotation.JsonGetter
 
-  def getLastName: String
+import scala.collection.JavaConverters._
 
-  def getUserRoles: Seq[UserRole]
-}
+class User(pSignum: String, pFirstName: String, pLastName: String, pCompundAttribute: CompoundAttribute, pExtra: CompoundAttribute = null) {
+  private var _signum: String = pSignum
+  private var _firstName: String = pFirstName
+  private var _lastName: String = pLastName
+  private var _userRoles: java.util.List[UserRole] = new util.ArrayList()
+  private var _extra: CompoundAttribute = pExtra
 
-case class UserBehaviour(user: User) {
-  def hasWriteAccess(uri: String): Boolean = user.getUserRoles
-    .flatMap(ur => ur.getPermissions)
+  @JsonGetter
+  def signum = _signum
+
+  @JsonGetter
+  def firstName = _firstName
+
+  @JsonGetter
+  def lastName = _lastName
+
+  @JsonGetter
+  def extra = _extra
+
+  def hasWriteAccess(uri: String): Boolean = userRoles
+    .flatMap(ur => ur.permissions)
     .filter(_.isWritable)
-    .exists(p => p.getResource.getUri == uri)
+    .exists(p => p.resource.uri == uri)
 
-  def hasRole(role: UserRole): Boolean = user.getUserRoles.contains(role)
-}
+  def userRoles = _userRoles.asScala
 
-object User {
-  implicit def toUser(user: User): UserBehaviour = UserBehaviour(user)
+  def hasRole(role: UserRole): Boolean = userRoles.contains(role)
+
+  private def this() = this(null, null, null, null, null)
 }
