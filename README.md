@@ -3,8 +3,8 @@ Example application with
 - Spring Data JPA repo
 - Spring Data Mongo repo 
 - All implemented in Scala
-- Documented with [draw.io](https://www.draw.io/)
+- Follow DDD style architecture
 
-Start a MongoDB and then just run
+Start a MongoDB (optional) and then just run
 
     $ ./gradlew bootRun
